@@ -2,7 +2,7 @@ Shader "Unlit/StarShader"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {} // If not needed, this will be bypassed
+        _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
         _Size ("Size", float) = 1.0
     }
@@ -13,13 +13,15 @@ Shader "Unlit/StarShader"
 
         Pass
         {
+            Blend SrcAlpha OneMinusSrcAlpha // For proper alpha blending
+            ZWrite Off // Disable depth writing
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
-            #include "UnityInstancing.cginc" // For instancing support
+            #include "UnityInstancing.cginc"
 
             struct appdata
             {
@@ -33,7 +35,7 @@ Shader "Unlit/StarShader"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
-                UNITY_VERTEX_OUTPUT_STEREO // For stereo rendering
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             sampler2D _MainTex;
@@ -44,21 +46,16 @@ Shader "Unlit/StarShader"
             {
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
-                
-                // Initialize stereo output to ensure both eyes are rendered correctly
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); 
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-                // Correct star size transformation
+                // Scale the vertex position based on the size
                 float4 scaledVertex = v.vertex;
-                scaledVertex.xyz *= _Size; // Scale the star
+                scaledVertex.xyz *= _Size;
 
-                // Standard VR-aware transformation using UnityObjectToClipPos
+                // Apply the position transformation for stereo
                 o.vertex = UnityObjectToClipPos(scaledVertex);
+                o.uv = v.uv;
 
-                // Apply UV transformation
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-
-                // Transfer fog data
                 UNITY_TRANSFER_FOG(o, o.vertex);
 
                 return o;
@@ -68,14 +65,17 @@ Shader "Unlit/StarShader"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // Calculate distance from centre of the quad
-                float distance_from_centre = length((2 * i.uv) - 1);
+                // Center the UV coordinates from -0.5 to +0.5
+                float2 centeredUV = i.uv - 0.5;
 
-                // Desmos-designed function to give punchy star drop off.
-                float inverse_dist = saturate((0.2 / distance_from_centre) - 0.2);
+                // Calculate the distance from the center of the star (normalised)
+                float distance_from_centre = length(centeredUV) * 2.0;
 
-                // Star colour with a smooth falloff based on distance from the centre
-                float4 col = float4(_Color.r, _Color.g, _Color.b, inverse_dist);
+                // Smoothstep for a circular dropoff
+                float alpha = smoothstep(0.7, 0.3, distance_from_centre);
+
+                // Set the color with proper alpha
+                fixed4 col = fixed4(_Color.rgb, alpha);
 
                 // Apply fog if needed
                 UNITY_APPLY_FOG(i.fogCoord, col);

@@ -1937,7 +1937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b39f521e52e1704686dafe2333207a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starSizeMin: 0
+  starSizeMin: 1
   starSizeMax: 5
 --- !u!1 &1364618965560021931
 GameObject:

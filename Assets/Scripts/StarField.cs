@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StarField : MonoBehaviour {
-    [Range(0, 100)]
-    [SerializeField] private float starSizeMin = 0f;
-    [Range(0, 100)]
-    [SerializeField] private float starSizeMax = 5f;
+    [Range(1, 100)] // Adjust the range if needed
+    [SerializeField] private float starSizeMin = 1f; // Default minimum size
+    [Range(1, 100)] // Adjust the range if needed
+    [SerializeField] private float starSizeMax = 6f; // Default maximum size
+
     private List<StarDataLoader.Star> stars;
     private List<GameObject> starObjects;
 
@@ -22,6 +23,7 @@ public class StarField : MonoBehaviour {
             stargo.transform.parent = transform;
             stargo.name = $"HR {star.catalog_number}";
             stargo.transform.localPosition = star.position * starFieldScale;
+            // Use default values for star sizes
             //stargo.transform.localScale = Vector3.one * Mathf.Lerp(starSizeMin, starSizeMax, star.size);
             stargo.transform.LookAt(transform.position);
             stargo.transform.Rotate(0, 180, 0);
