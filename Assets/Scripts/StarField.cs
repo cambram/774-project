@@ -26,20 +26,11 @@ public class StarField : MonoBehaviour {
             stargo.transform.LookAt(transform.position);
             stargo.transform.Rotate(0, 180, 0);
             Material material = stargo.GetComponent<MeshRenderer>().material;
-            material.shader = Shader.Find("Unlit/Color"); //StarShader
+            material.shader = Shader.Find("Unlit/StarShader"); //StarShader
             material.SetFloat("_Size", Mathf.Lerp(starSizeMin, starSizeMax, star.size));
             material.color = star.colour;
             starObjects.Add(stargo);
         }
-    }
-
-    // Could also do in Update with Time.deltatime scaling.
-    private void FixedUpdate() {
-        if (Input.GetKey(KeyCode.Mouse1)) {
-            Camera.main.transform.RotateAround(Camera.main.transform.position, Camera.main.transform.right, Input.GetAxis("Mouse Y"));
-            Camera.main.transform.RotateAround(Camera.main.transform.position, Vector3.up, -Input.GetAxis("Mouse X"));
-        }
-        return;
     }
 
     private void OnValidate() {
