@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.atmoky.truespatial": {
+      "version": "file:C:/Users/Cameron/Downloads/atmokyTrueSpatial_Unity_v1.4.0/atmokyTrueSpatial_Unity_v1.4.0/com.atmoky.truespatial-1.4.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "2.4.4",
       "depth": 0,
