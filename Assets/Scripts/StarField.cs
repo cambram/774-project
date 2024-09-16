@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR;
+using TMPro;
 
 public class StarField : MonoBehaviour {
     [Range(0, 100)]
@@ -9,10 +12,13 @@ public class StarField : MonoBehaviour {
     private List<StarDataLoader.Star> stars;
     private List<GameObject> starObjects;
     private Dictionary<int, GameObject> constellationVisible = new();
+    private InputData _inputData;
+    private bool wasAButtonPressed = false;
 
     private readonly int starFieldScale = 400;
 
     void Start() {
+        _inputData = GetComponent<InputData>();
         // Read in the star data.
         StarDataLoader sdl = new();
         stars = sdl.LoadData();
@@ -98,10 +104,25 @@ public class StarField : MonoBehaviour {
 
     private void Update() {
         // Check for numeric presses and toggle the constellation highlighting.
-        for (int i = 0; i < 10; i++) {
-            if (Input.GetKeyDown(KeyCode.Alpha0 + i)) {
-                ToggleConstellation(i);
+        //for (int i = 0; i < 10; i++) {
+        //    if (Input.GetKeyDown(KeyCode.Alpha0 + i)) {
+        //        ToggleConstellation(i);
+        //    }
+        //}
+
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
+            if (Abutton && !wasAButtonPressed) {
+                ToggleConstellation(1);
+                ToggleConstellation(2);
+                ToggleConstellation(3);
+                ToggleConstellation(4);
+                ToggleConstellation(5);
+                ToggleConstellation(6);
+                ToggleConstellation(7);
+                ToggleConstellation(8); // Only call this once when the button is first pressed
             }
+            // Update the previous state to the current state
+            wasAButtonPressed = Abutton;
         }
     }
 

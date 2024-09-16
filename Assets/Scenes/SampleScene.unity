@@ -10867,6 +10867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922377713}
   - component: {fileID: 1922377714}
+  - component: {fileID: 1922377715}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -10904,6 +10905,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   starSizeMin: 1
   starSizeMax: 5
+--- !u!114 &1922377715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922377712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7b85f5efcdaa945ac1c97b863ce405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1937903181
 PrefabInstance:
   m_ObjectHideFlags: 0
