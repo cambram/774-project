@@ -100,6 +100,13 @@ public class StarField : MonoBehaviour {
                  3757, 3888, 3757, 4301, 4301, 4295, 4295, 3888, 4295, 4554,
                  4554, 4660, 4660, 4301, 4660, 4905, 4905, 5054, 5054, 5191,
                  4554, 4518, 4518, 4335, 4335, 4069, 4069, 4033, 4518, 4377, 4377, 4375 }),
+    // Southern Crux
+    (new int[] { 4730, 4763, 4853, 4656},
+     new int[] { 4853, 4656, 4730, 4763}),
+    // Scorpius - STILL TO COMPLETE
+    (new int[] { 6527, 6580, 6615, 6553, 6380, 6271, 6247,6241, 6165, 6134, 6084, 5953},
+     new int[] { 6527, 6580, 6580, 6615, 6615, 6553, 6553, 6380, 6380, 6271, 
+                 6271, 6247, 6247, 6241, 6241, 6165, 6165, 6134, 6134, 6084, 6084, 5953}),
   };
 
     private void Update() {
@@ -112,6 +119,7 @@ public class StarField : MonoBehaviour {
 
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
             if (Abutton && !wasAButtonPressed) {
+                ToggleConstellation(0);
                 ToggleConstellation(1);
                 ToggleConstellation(2);
                 ToggleConstellation(3);
@@ -119,7 +127,8 @@ public class StarField : MonoBehaviour {
                 ToggleConstellation(5);
                 ToggleConstellation(6);
                 ToggleConstellation(7);
-                ToggleConstellation(8); // Only call this once when the button is first pressed
+                ToggleConstellation(8);
+                ToggleConstellation(9);// Only call this once when the button is first pressed
             }
             // Update the previous state to the current state
             wasAButtonPressed = Abutton;
