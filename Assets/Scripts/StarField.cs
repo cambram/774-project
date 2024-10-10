@@ -9,6 +9,8 @@ public class StarField : MonoBehaviour {
     [SerializeField] private float starSizeMin = 0f;
     [Range(0, 100)]
     [SerializeField] private float starSizeMax = 5f;
+    [SerializeField]
+    private Camera _camera;
     private List<StarDataLoader.Star> stars;
     private List<GameObject> starObjects;
     private Dictionary<int, GameObject> constellationVisible = new();
@@ -41,13 +43,13 @@ public class StarField : MonoBehaviour {
     }
 
     // Could also do in Update with Time.deltatime scaling.
-    private void FixedUpdate() {
+    /*private void FixedUpdate() {
         if (Input.GetKey(KeyCode.Mouse1)) {
             Camera.main.transform.RotateAround(Camera.main.transform.position, Camera.main.transform.right, Input.GetAxis("Mouse Y"));
             Camera.main.transform.RotateAround(Camera.main.transform.position, Vector3.up, -Input.GetAxis("Mouse X"));
         }
         return;
-    }
+    }*/
 
     private void OnValidate() {
         if (starObjects != null) {
@@ -148,13 +150,8 @@ public class StarField : MonoBehaviour {
     };
 
     private void Update() {
-        // Check for numeric presses and toggle the constellation highlighting.
-        //for (int i = 0; i < 10; i++) {
-        //    if (Input.GetKeyDown(KeyCode.Alpha0 + i)) {
-        //        ToggleConstellation(i);
-        //    }
-        //}
-
+        this.transform.position = _camera.transform.position;
+        Debug.Log("this = " + this.transform.position + "\nuser = " + _camera.transform.position);
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
             if (Abutton && !wasAButtonPressed) {
                 for(int i = 0; i < constellations.Count; i++) {
