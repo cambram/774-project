@@ -107,7 +107,7 @@ public class StarField : MonoBehaviour {
     (new int[] { 6527, 6580, 6615, 6553, 6380, 6271, 6247,6241, 6165, 6134, 6084, 5953},
      new int[] { 6527, 6580, 6580, 6615, 6615, 6553, 6553, 6380, 6380, 6271, 
                  6271, 6247, 6247, 6241, 6241, 6165, 6165, 6134, 6134, 6084, 6084, 5953}),
-  };
+    };
 
     private void Update() {
         // Check for numeric presses and toggle the constellation highlighting.
