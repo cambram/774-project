@@ -16,10 +16,12 @@ public class StarField : MonoBehaviour {
     private Dictionary<int, GameObject> constellationVisible = new();
     private InputData _inputData;
     private bool wasAButtonPressed = false;
+    public float rotationSpeed = 50f;
 
     private readonly int starFieldScale = 400;
 
     void Start() {
+        // This is to retrieve the InputData script in order to communicate with the quest controllers
         _inputData = GetComponent<InputData>();
         // Read in the star data.
         StarDataLoader sdl = new();
@@ -108,11 +110,8 @@ public class StarField : MonoBehaviour {
     (new int[] { 4730, 4763, 4853, 4656},
      new int[] { 4853, 4656, 4730, 4763}),
     // Scorpius
-    (new int[] { 6527, 6580, 6615, 6553, 6380, 6271, 6247, 6241, 6165, 6134, 
-                 6084, 5928, 5944, 5953, 5984, 6027},
-     new int[] { 6527, 6580, 6580, 6615, 6615, 6553, 6553, 6380, 6380, 6271, 6271, 6247,
-                 6247, 6241, 6241, 6165, 6165, 6134, 6134, 6084, 6084, 5953, 5928, 5944, 5944, 
-                 5953, 5953, 5984, 5984, 6027}),
+    (new int[] { 6527, 6580, 6615, 6553, 6380, 6271, 6247, 6241, 6165, 6134, 6084, 5928, 5944, 5953, 5984, 6027},
+     new int[] { 6527, 6580, 6580, 6615, 6615, 6553, 6553, 6380, 6380, 6271, 6271, 6247, 6247, 6241, 6241, 6165, 6165, 6134, 6134, 6084, 6084, 5953, 5928, 5944, 5944, 5953, 5953, 5984, 5984, 6027}),
     // Virgo 
     (new int[] { 4932, 4910, 4825, 4689, 4540, 4963, 5056, 5315, 5107, 5264, 5511 },
      new int[] { 4932, 4910, 4910, 4825, 4825, 4689, 4689, 4540, 4825, 4963, 4910, 5107, 4963, 5056, 5056, 5107, 5056, 5315, 5107, 5264, 5264, 5511 }),
@@ -151,15 +150,22 @@ public class StarField : MonoBehaviour {
 
     private void Update() {
         this.transform.position = _camera.transform.position;
-        Debug.Log("this = " + this.transform.position + "\nuser = " + _camera.transform.position);
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
             if (Abutton && !wasAButtonPressed) {
-                for(int i = 0; i < constellations.Count; i++) {
+                for (int i = 0; i < constellations.Count; i++) {
                     ToggleConstellation(i);
                 }
             }
             // Update the previous state to the current state
             wasAButtonPressed = Abutton;
+        }
+
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue)) {
+            // Rotate around the Y axis (horizontal joystick movement -> left/right rotation)
+            this.transform.Rotate(Vector3.up, -joystickValue.x * rotationSpeed * Time.deltaTime);
+
+            // Rotate around the X axis (vertical joystick movement -> up/down rotation)
+            this.transform.Rotate(Vector3.right, -joystickValue.y * rotationSpeed * Time.deltaTime);
         }
     }
 

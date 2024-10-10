@@ -19,8 +19,11 @@ public class InputDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
-            Debug.Log("A button clicked: " + Abutton);
-        }
+        //if(_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
+        //    Debug.Log("A button clicked: " + Abutton);
+        //}
+        //if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue)) {
+        //    Debug.Log("Joystick value: " + joystickValue);
+        //}
     }
 }

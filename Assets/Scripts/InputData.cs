@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+// initialisation adn setup for communicating with the quest controllers
 
 public class InputData : MonoBehaviour
 {
