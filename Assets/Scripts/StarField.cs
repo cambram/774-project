@@ -16,7 +16,11 @@ public class StarField : MonoBehaviour {
     private Dictionary<int, GameObject> constellationVisible = new();
     private InputData _inputData;
     private bool wasAButtonPressed = false;
-    public float rotationSpeed = 50f;
+    public float rotationSpeed = 30f;
+    public float smoothTime = 0.2f;  // Controls how quickly the easing happens
+
+    private Vector2 currentJoystickValue = Vector2.zero;
+    private Vector2 smoothVelocity = Vector2.zero;
 
     private readonly int starFieldScale = 400;
 
@@ -43,15 +47,6 @@ public class StarField : MonoBehaviour {
             starObjects.Add(stargo);
         }
     }
-
-    // Could also do in Update with Time.deltatime scaling.
-    /*private void FixedUpdate() {
-        if (Input.GetKey(KeyCode.Mouse1)) {
-            Camera.main.transform.RotateAround(Camera.main.transform.position, Camera.main.transform.right, Input.GetAxis("Mouse Y"));
-            Camera.main.transform.RotateAround(Camera.main.transform.position, Vector3.up, -Input.GetAxis("Mouse X"));
-        }
-        return;
-    }*/
 
     private void OnValidate() {
         if (starObjects != null) {
@@ -161,11 +156,19 @@ public class StarField : MonoBehaviour {
         }
 
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue)) {
-            // Rotate around the Y axis (horizontal joystick movement -> left/right rotation)
-            this.transform.Rotate(Vector3.up, -joystickValue.x * rotationSpeed * Time.deltaTime);
+            // Smoothly interpolate joystick input to avoid abrupt jolts
+            currentJoystickValue = Vector2.SmoothDamp(currentJoystickValue, joystickValue, ref smoothVelocity, smoothTime);
 
-            // Rotate around the X axis (vertical joystick movement -> up/down rotation)
-            this.transform.Rotate(Vector3.right, -joystickValue.y * rotationSpeed * Time.deltaTime);
+            // Get camera's right and up directions for intuitive rotation
+            Vector3 right = _camera.transform.right;
+            Vector3 up = _camera.transform.up;
+
+            // Rotate the starfield with smoothed joystick input
+            this.transform.Rotate(up, currentJoystickValue.x * rotationSpeed * Time.deltaTime, Space.World);
+            this.transform.Rotate(right, -currentJoystickValue.y * rotationSpeed * Time.deltaTime, Space.World);
+        } else {
+            // Gradually ease joystick values back to zero when not in use
+            currentJoystickValue = Vector2.SmoothDamp(currentJoystickValue, Vector2.zero, ref smoothVelocity, smoothTime);
         }
     }
 
