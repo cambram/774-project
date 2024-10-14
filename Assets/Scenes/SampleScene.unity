@@ -1224,6 +1224,7 @@ MonoBehaviour:
   _menu: {fileID: 618378757}
   _head: {fileID: 1598832558}
   _spawnDistance: 2
+  _starFieldHolder: {fileID: 843884119}
   _mainMenuUI: {fileID: 636523029}
   _constellationLocatorUI: {fileID: 1673041345}
   _quitConfirmUI: {fileID: 215863600}
@@ -16270,7 +16271,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2085777708}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87678876}
+        m_TargetAssemblyTypeName: GameMenuManager, Assembly-CSharp
+        m_MethodName: displayAquarius
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2085777708
 MonoBehaviour:
   m_ObjectHideFlags: 0

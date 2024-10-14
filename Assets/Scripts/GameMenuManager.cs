@@ -56,6 +56,92 @@ public class GameMenuManager : MonoBehaviour
     }
 
     //Constellation Functions
+    // 1 Aquarius
+    public void displayAquarius() {
+        Debug.Log("Aquarius displayed");
+        _starFieldHolderScript.ToggleConstellation(0);
+    }
+    // 2 Aries
+    public void displayAries() {
+        _starFieldHolderScript.ToggleConstellation(1);
+    }
+    // 3 Cancer
+    public void displayCancer() {
+        _starFieldHolderScript.ToggleConstellation(2);
+    }
+    // 4 Capricorn
+    public void displayCapricorn() {
+        _starFieldHolderScript.ToggleConstellation(3);
+    }
+    // 5 Centaurus
+    public void displayCentaurus() {
+        _starFieldHolderScript.ToggleConstellation(4);
+    }
+    // 6 Cygnus
+    public void displayCygnus() {
+        _starFieldHolderScript.ToggleConstellation(5);
+    }
+    // 7 Gemini
+    public void displayGemini() {
+        _starFieldHolderScript.ToggleConstellation(6);
+    }
+    // 8 Hydra
+    public void displayHydra() {
+        _starFieldHolderScript.ToggleConstellation(7);
+    }
+    // 9 Leo
+    public void displayLeo() {
+        _starFieldHolderScript.ToggleConstellation(8);
+    }
+    // 10 Leo Minor
+    public void displayLeoMinor() {
+        _starFieldHolderScript.ToggleConstellation(10);
+    }
+    // 11 Libra
+    public void displayLibra() {
+        _starFieldHolderScript.ToggleConstellation(11);
+    }
+    // 12 Lynx
+    public void displayLynx() {
+        _starFieldHolderScript.ToggleConstellation(12);
+    }
+    // 13 Monceros
+    public void displayMonceros() {
+        _starFieldHolderScript.ToggleConstellation(13);
+    }
+    // 14 Orion
+    public void displayOrion() {
+        _starFieldHolderScript.ToggleConstellation(14);
+    }
+    // 15 Pisces
+    public void displayPisces() {
+        _starFieldHolderScript.ToggleConstellation(15);
+    }
+    // 16 Sagittarius
+    public void displaySagittarius() {
+        _starFieldHolderScript.ToggleConstellation(16);
+    }
+    // 17 Scorpius
+    public void displayScorpius() {
+        _starFieldHolderScript.ToggleConstellation(17);
+    }
+    // 18 Southern Crux
+    public void displaySouthernCrux() {
+        _starFieldHolderScript.ToggleConstellation(18);
+    }
+    // 19 Taurus
+    public void displayTaurus() {
+        _starFieldHolderScript.ToggleConstellation(19);
+    }
+    // 20 Ursa Major
+    public void displayUrsaMajor() {
+        _starFieldHolderScript.ToggleConstellation(20);
+    }
+    // 21 Virgo
+    public void displayVirgo() {
+        _starFieldHolderScript.ToggleConstellation(21);
+    }
+
 
     //Quit Functions
     public void QuitExperience() {

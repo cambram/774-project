@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR;
 using TMPro;
+using System;
+using System.Reflection;
 
 public class StarField : MonoBehaviour {
     [Range(0, 100)]
@@ -154,7 +156,7 @@ public class StarField : MonoBehaviour {
         }
     }
 
-    void ToggleConstellation(int index) {
+    public void ToggleConstellation(int index) {
         // Safety check the index is valid.
         if ((index < 0) || (index >= constellations.Count)) {
             return;
@@ -216,8 +218,4 @@ public class StarField : MonoBehaviour {
         // Remove from our dictionary as it's now off.
         constellationVisible.Remove(index);
     }
-
-    //Display Individual Constellations
-
-
 }
