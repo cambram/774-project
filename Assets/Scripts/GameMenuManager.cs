@@ -58,8 +58,30 @@ public class GameMenuManager : MonoBehaviour
     //Constellation Functions
     // 1 Aquarius
     public void displayAquarius() {
-        Debug.Log("Aquarius displayed");
-        _starFieldHolderScript.ToggleConstellation(0);
+        if (_starFieldHolderScript.GetIsAllVisible() == false) {
+            Debug.Log("Hello");
+            // check if there is another constellation other than this one visible?
+            if (_starFieldHolderScript.GetIsIndividualVisible()) { // yes, there is an individual constellation visible
+                int _visIndex = _starFieldHolderScript.WhichIndexIsVisible();
+                if (_visIndex == 0) { // is it this one?
+                                      // yes, then untoggle it
+                    _starFieldHolderScript.ToggleConstellation(_visIndex);
+                    _starFieldHolderScript.SetIsIndividualVisible(false);
+                    _starFieldHolderScript.SetIsVisibleArray(false, _visIndex);
+                } else {
+                    // no, then untoggle the other constellation... 
+                    _starFieldHolderScript.ToggleConstellation(_visIndex);
+                    _starFieldHolderScript.SetIsVisibleArray(false, _visIndex);
+                    // ... and toggle this one
+                    _starFieldHolderScript.ToggleConstellation(0);
+                    _starFieldHolderScript.SetIsVisibleArray(true, 0);
+                }
+            } else { // no there is no constellation individually visible
+                _starFieldHolderScript.ToggleConstellation(0);
+                _starFieldHolderScript.SetIsIndividualVisible(true);
+                _starFieldHolderScript.SetIsVisibleArray(true, 0);
+            }
+        }
     }
     // 2 Aries
     public void displayAries() {

@@ -26,7 +26,14 @@ public class StarField : MonoBehaviour {
 
     private readonly int starFieldScale = 400;
 
+    bool[] _isVisibleArray = new bool[21];
+    public bool _isIndividualVisible = false;
+    public bool _isAllVisible = false;
+
     void Start() {
+        for (int i = 0; i < _isVisibleArray.Length; i++) {
+            _isVisibleArray[i] = false;
+        }
         // This is to retrieve the InputData script in order to communicate with the quest controllers
         _inputData = GetComponent<InputData>();
         // Read in the star data.
@@ -131,9 +138,19 @@ public class StarField : MonoBehaviour {
         this.transform.position = _camera.transform.position;
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
             if (Abutton && !wasAButtonPressed) {
+                // to prevent individual constellations from untoggling by mistake
+                if (_isIndividualVisible) { // yes an individual constellation is visible
+                    // find out which constellation is visible and remove it
+                    RemoveConstellation(WhichIndexIsVisible());
+                    SetIsVisibleArray(false, WhichIndexIsVisible());
+                    // then set is individual visible to false
+                    _isIndividualVisible = false;
+                }
+
                 for (int i = 0; i < constellations.Count; i++) {
                     ToggleConstellation(i);
                 }
+                _isAllVisible = !_isAllVisible; 
             }
             // Update the previous state to the current state
             wasAButtonPressed = Abutton;
@@ -154,6 +171,31 @@ public class StarField : MonoBehaviour {
             // Gradually ease joystick values back to zero when not in use
             currentJoystickValue = Vector2.SmoothDamp(currentJoystickValue, Vector2.zero, ref smoothVelocity, smoothTime);
         }
+    }
+
+    public void SetIsVisibleArray(bool v, int i) {
+        _isVisibleArray[i] = v;
+    }
+
+    public void SetIsIndividualVisible(bool v) {
+        _isIndividualVisible = v;
+    }
+
+    public bool GetIsIndividualVisible() {
+        return _isIndividualVisible;
+    }
+
+    public bool GetIsAllVisible() {
+        return _isAllVisible;
+    }
+
+    public int WhichIndexIsVisible() {
+        for(int i = 0; i < _isVisibleArray.Length; i++) {
+            if (_isVisibleArray[i]) {
+                return i;
+            }
+        } 
+        return -1;
     }
 
     public void ToggleConstellation(int index) {
