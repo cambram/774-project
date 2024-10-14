@@ -41,6 +41,10 @@ public class GameMenuManager : MonoBehaviour
     private GameObject _prev;
     int _constellationPage = 1;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+
+
     void Start() {
         // This is to retrieve the InputData script in order to communicate with the quest controllers
         _starFieldHolderScript = _starFieldHolder.GetComponent<StarField>();
@@ -92,10 +96,13 @@ public class GameMenuManager : MonoBehaviour
         }
     }
 
+    public void PlayUIAudio() {
+        _audioSource.Play();
+    }
+
     //Constellation Functions
     // 1 Aquarius
     public void displayAquarius() {
-        Debug.Log("Aquarius called");
         DisplayIndividualConstellation(0);
     }
     // 2 Aries

@@ -55,13 +55,6 @@ public class StarField : MonoBehaviour {
             material.color = star.colour;
             starObjects.Add(stargo);
         }
-        for(int i = 0; i < constellations.Count; i++) {
-            // Access the first number in the first array of the tuple
-            int firstNumber = constellations[i].Item1[0];
-
-            // Log the first number
-            Debug.Log($"First number in constellation {i + 1}: {firstNumber}");
-        }
     }
 
     private void OnValidate() {
@@ -229,7 +222,7 @@ public class StarField : MonoBehaviour {
             starObjects[catalogNumber - 1].GetComponent<MeshRenderer>().material.color = Color.white;
         }
 
-        GameObject constellationHolder = new($"Constellation {index}");
+        GameObject constellationHolder = new($"Constellation_{index}");
         constellationHolder.transform.parent = transform;
         constellationVisible[index] = constellationHolder;
 
