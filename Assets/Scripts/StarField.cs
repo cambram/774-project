@@ -217,4 +217,7 @@ public class StarField : MonoBehaviour {
         constellationVisible.Remove(index);
     }
 
+    //Display Individual Constellations
+
+
 }
