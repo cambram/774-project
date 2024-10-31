@@ -107,47 +107,38 @@ public class GameMenuManager : MonoBehaviour
     }
     // 2 Aries
     public void displayAries() {
-        Debug.Log("Aries called");
         DisplayIndividualConstellation(1);
     }
     // 3 Cancer
     public void displayCancer() {
-        Debug.Log("Cancer called");
         DisplayIndividualConstellation(2);
     }
     // 4 Capricorn
     public void displayCapricorn() {
-        Debug.Log("Capricorn called");
         DisplayIndividualConstellation(3);
     }
     // 5 Centaurus
     public void displayCentaurus() {
-        Debug.Log("Centaurus called");
         DisplayIndividualConstellation(4);
     }
     // 6 Cygnus
     public void displayCygnus() {
-        Debug.Log("Cygnus called");
         DisplayIndividualConstellation(5);
     }
     // 7 Gemini
     public void displayGemini() {
-        Debug.Log("Gemini called");
         DisplayIndividualConstellation(6);
     }
     // 8 Hydra
     public void displayHydra() {
-        Debug.Log("Hydra called");
         DisplayIndividualConstellation(7);
     }
     // 9 Leo
     public void displayLeo() {
-        Debug.Log("Leo called");
         DisplayIndividualConstellation(8);
     }
     // 10 Leo Minor
     public void displayLeoMinor() {
-        Debug.Log("Leo Minor called");
         DisplayIndividualConstellation(10);
     }
     // 11 Libra
@@ -194,7 +185,6 @@ public class GameMenuManager : MonoBehaviour
     public void displayVirgo() {
         DisplayIndividualConstellation(21);
     }
-
 
     //Quit Functions
     public void QuitExperience() {
