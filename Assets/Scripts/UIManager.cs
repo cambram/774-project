@@ -49,6 +49,10 @@ public class UIManager : MonoBehaviour
     //Settings UI pages
     public GameObject _mainSettingsPage;
     public GameObject _volumePage;
+    public GameObject _player;
+    private Player _playerScript;
+
+    public AudioSource _audioSourceUI;
 
     //Colours
     private Color _offYellow = new Color(0.9529411764705882f, 0.8588235294117647f, 0.4823529411764706f, 1.0f);
@@ -58,6 +62,7 @@ public class UIManager : MonoBehaviour
     void Start(){
         // This is to retrieve the InputData script in order to communicate with the quest controllers
         _starFieldHolderScript = _starFieldHolder.GetComponent<StarField>();
+        _playerScript = _player.GetComponent<Player>();
         _inputData = GetComponent<InputData>();
         _menu.SetActive(false);
         OpenConstellationLocator();
@@ -144,51 +149,51 @@ public class UIManager : MonoBehaviour
     }
     // 10 Leo Minor
     public void displayLeoMinor() {
-        DisplayIndividualConstellation(10);
+        DisplayIndividualConstellation(9);
     }
     // 11 Libra
     public void displayLibra() {
-        DisplayIndividualConstellation(11);
+        DisplayIndividualConstellation(10);
     }
     // 12 Lynx
     public void displayLynx() {
-        DisplayIndividualConstellation(12);
+        DisplayIndividualConstellation(11);
     }
     // 13 Monceros
     public void displayMonceros() {
-        DisplayIndividualConstellation(13);
+        DisplayIndividualConstellation(12);
     }
     // 14 Orion
     public void displayOrion() {
-        DisplayIndividualConstellation(14);
+        DisplayIndividualConstellation(13);
     }
     // 15 Pisces
     public void displayPisces() {
-        DisplayIndividualConstellation(15);
+        DisplayIndividualConstellation(14);
     }
     // 16 Sagittarius
     public void displaySagittarius() {
-        DisplayIndividualConstellation(16);
+        DisplayIndividualConstellation(15);
     }
     // 17 Scorpius
     public void displayScorpius() {
-        DisplayIndividualConstellation(17);
+        DisplayIndividualConstellation(16);
     }
     // 18 Southern Crux
     public void displaySouthernCrux() {
-        DisplayIndividualConstellation(18);
+        DisplayIndividualConstellation(17);
     }
     // 19 Taurus
     public void displayTaurus() {
-        DisplayIndividualConstellation(19);
+        DisplayIndividualConstellation(18);
     }
     // 20 Ursa Major
     public void displayUrsaMajor() {
-        DisplayIndividualConstellation(20);
+        DisplayIndividualConstellation(19);
     }
     // 21 Virgo
     public void displayVirgo() {
-        DisplayIndividualConstellation(21);
+        DisplayIndividualConstellation(20);
     }
 
     //Constellation page 
@@ -249,10 +254,14 @@ public class UIManager : MonoBehaviour
     }
 
     public void ResetView() {
-
+        _playerScript.ResetView();
     }
 
     //Navigation Functions
+    public void PlayUIAudio() {
+        _audioSourceUI.Play();
+    }
+
     public void OpenConstellationLocator() {
         _constellationLocatorUI.SetActive(true);
         _settingsUI.SetActive(false);
