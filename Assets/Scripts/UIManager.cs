@@ -80,6 +80,117 @@ public class UIManager : MonoBehaviour
         _menu.transform.forward *= -1;
     }
 
+    private void DisplayIndividualConstellation(int index) {
+        if (_starFieldHolderScript.GetIsAllVisible() == false) {
+            // check if there is another constellation other than this one visible?
+            if (_starFieldHolderScript.GetIsIndividualVisible()) { // yes, there is an individual constellation visible
+                int _visIndex = _starFieldHolderScript.WhichIndexIsVisible();
+                if (_visIndex == index) { // is it this one?
+                    // yes, then untoggle it
+                    _starFieldHolderScript.ToggleConstellation(_visIndex);
+                    _starFieldHolderScript.SetIsIndividualVisible(false);
+                    _starFieldHolderScript.SetIsVisibleArray(false, _visIndex);
+                } else {
+                    // no, then untoggle the other constellation... 
+                    _starFieldHolderScript.ToggleConstellation(_visIndex);
+                    _starFieldHolderScript.SetIsVisibleArray(false, _visIndex);
+                    // ... and toggle this one
+                    _starFieldHolderScript.ToggleConstellation(index);
+                    _starFieldHolderScript.SetIsVisibleArray(true, index);
+                }
+            } else { // no there is no constellation individually visible
+                _starFieldHolderScript.ToggleConstellation(index);
+                _starFieldHolderScript.SetIsIndividualVisible(true);
+                _starFieldHolderScript.SetIsVisibleArray(true, index);
+            }
+        }
+    }
+
+    // 1 Aquarius
+    public void displayAquarius() {
+        DisplayIndividualConstellation(0);
+    }
+    // 2 Aries
+    public void displayAries() {
+        DisplayIndividualConstellation(1);
+    }
+    // 3 Cancer
+    public void displayCancer() {
+        DisplayIndividualConstellation(2);
+    }
+    // 4 Capricorn
+    public void displayCapricorn() {
+        DisplayIndividualConstellation(3);
+    }
+    // 5 Centaurus
+    public void displayCentaurus() {
+        DisplayIndividualConstellation(4);
+    }
+    // 6 Cygnus
+    public void displayCygnus() {
+        DisplayIndividualConstellation(5);
+    }
+    // 7 Gemini
+    public void displayGemini() {
+        DisplayIndividualConstellation(6);
+    }
+    // 8 Hydra
+    public void displayHydra() {
+        DisplayIndividualConstellation(7);
+    }
+    // 9 Leo
+    public void displayLeo() {
+        DisplayIndividualConstellation(8);
+    }
+    // 10 Leo Minor
+    public void displayLeoMinor() {
+        DisplayIndividualConstellation(10);
+    }
+    // 11 Libra
+    public void displayLibra() {
+        DisplayIndividualConstellation(11);
+    }
+    // 12 Lynx
+    public void displayLynx() {
+        DisplayIndividualConstellation(12);
+    }
+    // 13 Monceros
+    public void displayMonceros() {
+        DisplayIndividualConstellation(13);
+    }
+    // 14 Orion
+    public void displayOrion() {
+        DisplayIndividualConstellation(14);
+    }
+    // 15 Pisces
+    public void displayPisces() {
+        DisplayIndividualConstellation(15);
+    }
+    // 16 Sagittarius
+    public void displaySagittarius() {
+        DisplayIndividualConstellation(16);
+    }
+    // 17 Scorpius
+    public void displayScorpius() {
+        DisplayIndividualConstellation(17);
+    }
+    // 18 Southern Crux
+    public void displaySouthernCrux() {
+        DisplayIndividualConstellation(18);
+    }
+    // 19 Taurus
+    public void displayTaurus() {
+        DisplayIndividualConstellation(19);
+    }
+    // 20 Ursa Major
+    public void displayUrsaMajor() {
+        DisplayIndividualConstellation(20);
+    }
+    // 21 Virgo
+    public void displayVirgo() {
+        DisplayIndividualConstellation(21);
+    }
+
     //Constellation page 
     public void NextButton() {
         switch (_pageNumber) {
