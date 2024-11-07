@@ -30,6 +30,8 @@ public class StarField : MonoBehaviour {
     public bool _isIndividualVisible = false;
     public bool _isAllVisible = false;
 
+    public AudioSource _audioSource;
+
     void Start() {
         for (int i = 0; i < _isVisibleArray.Length; i++) {
             _isVisibleArray[i] = false;
@@ -138,6 +140,7 @@ public class StarField : MonoBehaviour {
         this.transform.position = _camera.transform.position;
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool Abutton)) {
             if (Abutton && !wasAButtonPressed) {
+                _audioSource.Play();
                 // to prevent individual constellations from untoggling by mistake
                 if (_isIndividualVisible) { // yes an individual constellation is visible
                     // find out which constellation is visible and remove it
