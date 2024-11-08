@@ -54,6 +54,8 @@ public class UIManager : MonoBehaviour
 
     public AudioSource _audioSourceUI;
 
+    private string[] _starsInConstellation = new string[] { "HR 7950", "HR 838", "HR 3475", "HR 7754", "HR 4467", "HR 7949", "HR 2421", "HR 5020", "HR 4534", "HR 3974", "HR 5787", "HR 3690", "HR 3188", "HR 1903", "HR 383", "HR 7337", "HR 6580", "HR 4763", "HR 1497", "HR 3594", "HR 4910" };
+
     //Colours
     private Color _offYellow = new Color(0.9529411764705882f, 0.8588235294117647f, 0.4823529411764706f, 1.0f);
     private Color _offGrey = new Color(0.6196078431372549f, 0.6235294117647059f, 0.6431372549019608f, 1.0f);
@@ -102,13 +104,32 @@ public class UIManager : MonoBehaviour
                     // ... and toggle this one
                     _starFieldHolderScript.ToggleConstellation(index);
                     _starFieldHolderScript.SetIsVisibleArray(true, index);
+                    ShowConstellationInFront(index);
+
                 }
             } else { // no there is no constellation individually visible
                 _starFieldHolderScript.ToggleConstellation(index);
                 _starFieldHolderScript.SetIsIndividualVisible(true);
                 _starFieldHolderScript.SetIsVisibleArray(true, index);
+                ShowConstellationInFront(index);
             }
         }
+    }
+
+    private void ShowConstellationInFront(int index) {
+        GameObject starHolder = GameObject.Find($"{_starsInConstellation[index]}");
+        if (starHolder == null) {
+            Debug.LogWarning("Star GameObject not found.");
+            return;
+        }
+        // Calculate direction from the centre of StarfieldHolder to the constellation
+        Vector3 constellationDirection = (starHolder.transform.position - _starFieldHolder.transform.position).normalized;
+
+        // Determine the rotation required to align this direction with the user's forward view
+        Quaternion targetRotation = Quaternion.FromToRotation(constellationDirection, _head.transform.TransformDirection(Vector3.forward));
+
+        // Apply the rotation to StarfieldHolder to bring the constellation in front of the user
+        _starFieldHolder.transform.transform.rotation = targetRotation * _starFieldHolder.transform.rotation;
     }
 
     // 1 Aquarius
