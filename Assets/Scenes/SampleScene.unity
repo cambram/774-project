@@ -12037,6 +12037,7 @@ MonoBehaviour:
   _volumePage: {fileID: 606219588}
   _player: {fileID: 1519261636}
   _audioSourceUI: {fileID: 1758465326}
+  _workbenchManager: {fileID: 1984258536}
 --- !u!4 &1042295548
 Transform:
   m_ObjectHideFlags: 0

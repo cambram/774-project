@@ -61,4 +61,10 @@ public class WorkbenchManager : MonoBehaviour
         // Activate the new current page
         constellationPages[_currentPageIndex].SetActive(true);
     }
+
+    public void SetCurrentPage(int pageIndex) {
+        constellationPages[_currentPageIndex].SetActive(false);
+        _currentPageIndex = pageIndex;
+        constellationPages[_currentPageIndex].SetActive(true);
+    }
 }

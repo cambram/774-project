@@ -54,6 +54,9 @@ public class UIManager : MonoBehaviour
 
     public AudioSource _audioSourceUI;
 
+    public GameObject _workbenchManager;
+    private WorkbenchManager _workbenchManagerScript;
+
     private string[] _starsInConstellation = new string[] { "HR 7950", "HR 838", "HR 3475", "HR 7754", "HR 4467", "HR 7949", "HR 2421", "HR 5020", "HR 4534", "HR 3974", "HR 5787", "HR 3690", "HR 3188", "HR 1903", "HR 383", "HR 7337", "HR 6580", "HR 4763", "HR 1497", "HR 3594", "HR 4910" };
 
     //Colours
@@ -63,6 +66,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         // This is to retrieve the InputData script in order to communicate with the quest controllers
+        _workbenchManagerScript = _workbenchManager.GetComponent<WorkbenchManager>();
         _starFieldHolderScript = _starFieldHolder.GetComponent<StarField>();
         _playerScript = _player.GetComponent<Player>();
         _inputData = GetComponent<InputData>();
@@ -104,6 +108,7 @@ public class UIManager : MonoBehaviour
                     // ... and toggle this one
                     _starFieldHolderScript.ToggleConstellation(index);
                     _starFieldHolderScript.SetIsVisibleArray(true, index);
+                    _workbenchManagerScript.SetCurrentPage(index);
                     ShowConstellationInFront(index);
 
                 }
@@ -111,6 +116,7 @@ public class UIManager : MonoBehaviour
                 _starFieldHolderScript.ToggleConstellation(index);
                 _starFieldHolderScript.SetIsIndividualVisible(true);
                 _starFieldHolderScript.SetIsVisibleArray(true, index);
+                _workbenchManagerScript.SetCurrentPage(index);
                 ShowConstellationInFront(index);
             }
         }
