@@ -6,19 +6,19 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private GameObject _XROrigin;
+    [SerializeField]
+    private GameObject _mainCamera;
+    [SerializeField]
+    private Transform _cameraOffset;
+    private Vector3 _origin = new Vector3(2.326f, 0.4f, 4.395f);
+
     // Start is called before the first frame update
     void Start() {
-        //ResetView();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
     public void ResetView() {
-        _XROrigin.transform.position = new Vector3(2.61f, 0.4f, 4.45f);
+        _XROrigin.transform.position = _origin;
         _XROrigin.transform.eulerAngles = new Vector3(0, 200, 0);
     }
 }
