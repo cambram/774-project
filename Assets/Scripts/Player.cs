@@ -21,4 +21,12 @@ public class Player : MonoBehaviour
         _XROrigin.transform.position = _origin;
         _XROrigin.transform.eulerAngles = new Vector3(0, 200, 0);
     }
+
+    public void HeightUp() {
+        _XROrigin.transform.position += new Vector3(0, 0.1f, 0);
+    }
+
+    public void HeightDown() {
+        _XROrigin.transform.position += new Vector3(0, -0.1f, 0);
+    }
 }

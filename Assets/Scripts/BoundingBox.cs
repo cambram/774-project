@@ -8,7 +8,7 @@ public class BoundingBox : MonoBehaviour
 
     private void OnTriggerStay(Collider collision) {
         if (collision.CompareTag("boundingBox")) {
-            this.transform.position = new Vector3(2.07f, _head.transform.position.y, 3.617f);
+            this.transform.position = new Vector3(2.185f, _head.transform.position.y, 3.646f);
         }
     }
 }

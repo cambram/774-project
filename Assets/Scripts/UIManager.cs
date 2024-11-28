@@ -285,6 +285,16 @@ public class UIManager : MonoBehaviour
         _playerScript.ResetView();
     }
 
+    public void HeightUp() {
+        _playerScript.HeightUp();
+        _menu.transform.position += new Vector3(0, 0.1f, 0);
+    }
+
+    public void HeightDown() {
+        _playerScript.HeightDown();
+        _menu.transform.position += new Vector3(0, -0.1f, 0);
+    }
+
     //Navigation Functions
     public void PlayUIAudio() {
         _audioSourceUI.Play();
@@ -296,6 +306,7 @@ public class UIManager : MonoBehaviour
         _controlsUI.SetActive(false);
         _quitUI.SetActive(false);
 
+        _pageNumber = 1;
         _page1.SetActive(true);
         _page2.SetActive(false);
         _page3.SetActive(false);
